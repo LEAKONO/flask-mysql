@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Add Task</h1>
+<form method="POST">
+    <div class="mb-3">
+        <label for="task" class="form-label">Task</label>
+        <input type="text" name="task" id="task" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
