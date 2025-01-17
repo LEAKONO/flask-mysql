@@ -35,6 +35,27 @@ def add_task():
         flash('Task added successfully!', 'success')
         return redirect(url_for('index'))
     return render_template('add_task.html')
+@app.route('/edit/<int:task_id>', methods=['GET', 'POST'])
+def edit_task(task_id):
+    cursor = mysql.connection.cursor()
+    
+    if request.method == 'POST':
+        updated_task = request.form['task']
+        if not updated_task:
+            flash('Task cannot be empty!', 'error')
+            return redirect(url_for('edit_task', task_id=task_id))
+        
+        cursor.execute("UPDATE todos SET task = %s WHERE id = %s", (updated_task, task_id))
+        mysql.connection.commit()
+        cursor.close()
+        flash('Task updated successfully!', 'success')
+        return redirect(url_for('index'))
+    
+    # Fetch the task to be edited
+    cursor.execute("SELECT * FROM todos WHERE id = %s", (task_id,))
+    task = cursor.fetchone()
+    cursor.close()
+    return render_template('edit_task.html', task=task)
 
 @app.route('/delete/<int:task_id>')
 def delete_task(task_id):
