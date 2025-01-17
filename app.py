@@ -4,10 +4,9 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-# Update with your Workbench credentials
-app.config['MYSQL_HOST'] = '127.0.0.1'  # Or 'localhost'
-app.config['MYSQL_USER'] = 'root'  # Replace with your Workbench username
-app.config['MYSQL_PASSWORD'] = 'leakono'  # Replace with your Workbench password
+app.config['MYSQL_HOST'] = '127.0.0.1'  
+app.config['MYSQL_USER'] = 'root'  
+app.config['MYSQL_PASSWORD'] = 'leakono'  
 app.config['MYSQL_DB'] = 'todo_db'
 
 mysql = MySQL(app)
